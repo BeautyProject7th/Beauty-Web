@@ -1,0 +1,32 @@
+<h1>Edit Cosmetic</h1>
+
+<%= form_for :cosmetic, url: brand_cosmetic_path(@brand), method: :patch do |f| %>
+
+	<p>
+		<%= f.label :category %><br>
+		<%= f.text_field :cate %><br>
+	</p>
+
+	<p>
+		<%= f.label :sub_category %><br>
+		<%= f.text_field :sub_cate %><br>
+	</p>
+
+	<p>
+		<%= f.label :Product_Name %><br>
+		<%= f.text_field :pdName %><br>
+	</p>
+
+	<p>
+		<%= f.label :Product_Img %><br>
+		<%= f.text_field :pdImg %><br>
+	</p>
+
+	<p>
+		<%= f.submit %>
+	</p>
+<% end %>
+
+<p>
+	<%= link_to 'Back', brands_path %>
+</p>

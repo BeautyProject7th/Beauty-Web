@@ -1,0 +1,29 @@
+<h1>Show Cosmetic</h1>
+
+<p>
+	<%= link_to 'Edit', edit_brand_cosmetic_path(@brand, @cosmetic)%>
+</p>
+
+<p>
+	<strong>Category</strong>
+	<%= @cosmetic.cate %>
+</p>
+
+<P>
+	<strong>Sub Category</strong>
+	<%= @cosmetic.sub_cate %>
+</P>
+
+<p>
+	<strong>Product Name</strong>
+	<%= @cosmetic.pdName %>
+</p>
+
+<p>
+	<strong>Product Image</strong>
+	<%= @cosmetic.pdImg %>
+</p>
+
+<p>
+	<%= link_to 'Back to Cosmetic List', brand_path(@brand) %>
+</p>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cate: MyString
+  sub_cate: MyString
+  pdName: MyString
+  pdImg: MyText
+  brand: one
+
+two:
+  cate: MyString
+  sub_cate: MyString
+  pdName: MyString
+  pdImg: MyText
+  brand: two

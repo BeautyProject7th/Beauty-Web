@@ -1,0 +1,38 @@
+<div class = "beauty_main">
+	<div class >
+	<h1> Beauty Project <small>Software Maestro 7th</small></h1>
+	</div>
+</div>
+
+<div class = "container">
+
+<p>
+	<%= link_to 'New Brand', new_brand_path, class: "btn btn-default" %>
+</p>
+
+<table class = "table table-hover">
+	<tr>
+		<th> ID </th>
+		<th> Brand Name </th>
+		<th> Crawler </th>
+		<th> Time </th>
+	</tr>
+
+	<% @brands.each do |brand| %>
+	<tr data-link="<%= brand_path(brand) %>">
+		<td><%= brand.id %></td>
+		<td>
+			<%= brand.brand %>
+			<% if brand.created_at > Time.now - 3.days %>
+				<span class="badge new">new</span>
+			<% end %>
+			<% if brand.created_at > Time.now - 3.days %>
+				<span class="badge update">update</span>
+			<% end %>
+		</td>
+		<td><%= brand.crawler %></td>
+		<td><%= brand.created_at.strftime("%y.%m.%d, %H:%M") %></td>
+	</tr>
+	<% end %>
+</table>
+</div>

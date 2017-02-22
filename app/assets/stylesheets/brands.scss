@@ -1,0 +1,87 @@
+// Place all the styles related to the Brands controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.beauty_main {
+	background-color: #EA375D;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-bottom: 0px;
+	margin-right: auto;
+	margin-left: auto;
+
+	h1 {
+		color: #ffffff;	
+		display: inline-block;
+	}
+	small {
+		color: #707070;
+		font-size: 25px;
+	}
+	h5 {
+		display: inline-block;
+	}
+}
+
+.table {
+	th {
+		background-color: #BCBCBC;
+	}
+	a {
+	color: #333;
+	text-decoration: none;
+	}
+}
+
+.badge {
+	padding: 1px 5px 1px 5px;
+	margin-left: 5px;
+}
+
+.new {
+	background-color: #00b9f1;
+}
+
+.update {
+	background-color: #f9c00c;
+	margin-left: -1px !important;
+}
+
+.progress {
+	width: 80%;
+}
+
+.panel {
+	margin-top: 10px;
+	margin-bottom: 30px;
+
+	ul {
+		margin-bottom: 0px;
+	}
+}
+
+.container {
+	width: auto !important;
+	margin-top: 15px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+.navbar {
+	border: 0px;
+	border-radius: 0px;
+	margin-bottom: 20px;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+.navbar-header {
+	margin-right: 15px;
+	margin-left: 15px;
+}
+
+.open .dropdown-menu {
+	display: block;
+}

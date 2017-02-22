@@ -1,0 +1,49 @@
+<div class = "beauty_main">
+	<h1>Add Cosmetic <small>Beauty_project</small></h1>
+</div>
+
+<div class = "container">
+<%= form_for([@brand, @brand.cosmetics.build]) do |f| %>
+
+  <div class="form-horizontal">
+  	<div class="form-group">
+  	<%= f.label :category, class: "col-sm-2 control-label" %>
+  		<div class="col-sm-10">
+    		<%= f.text_field :cate, class: "col-sm-10 form-control", placeholder: "Input Cosmetic Category" %>
+    	</div>
+    </div>
+  </div>
+
+  <div class="form-horizontal">
+  	<div class="form-group">
+  	<%= f.label :Sub_Category, class: "col-sm-2 control-label" %>
+  		<div class="col-sm-10">
+    		<%= f.text_field :sub_cate, class: "col-sm-10 form-control", placeholder: "Input Cosmetic Sub Category" %>
+    	</div>
+    </div>
+  </div>  
+
+  <div class="form-horizontal">
+  	<div class="form-group">
+  	<%= f.label :Product_Name, class: "col-sm-2 control-label" %>
+  		<div class="col-sm-10">
+    		<%= f.text_field :pdName, class: "col-sm-10 form-control", placeholder: "Input Cosmetic Name" %>
+    	</div>
+    </div>
+  </div>  
+
+  <div class="form-horizontal">
+  	<div class="form-group">
+  	<%= f.label :Product_Img, class: "col-sm-2 control-label" %>
+  		<div class="col-sm-10">
+    		<%= f.text_field :pdImg, class: "col-sm-10 form-control", placeholder: "Input Cosmetic Image Path" %>
+    	</div>
+    </div>
+  </div>
+
+  <div class="form-group col-sm-offset-2 col-sm-10">
+    <%= f.submit class: "btn btn-default" %>
+    <%= link_to 'Back to Cosmetic List Page', brands_path, class: "btn btn-default" %>
+  </div>
+<% end %>
+</div>

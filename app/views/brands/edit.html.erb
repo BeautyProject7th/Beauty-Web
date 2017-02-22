@@ -1,0 +1,32 @@
+<h1>Add New Brand</h1>
+
+<%= form_for :brand, url: brand_path(@brand), method: :patch do |f| %>
+	<% if @brand.errors.any? %>
+	<div>
+		<h2><%= pluralize(@brand.errors.count, "error") %> prohibited this article from being saved: </h2>
+		<ul>
+			<% @brand.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+
+	<p>
+		<%= f.label :brand %><br>
+		<%= f.text_field :brand %><br>
+	</p>
+
+	<p>
+		<%= f.label :crawler %><br>
+		<%= f.text_field :crawler %><br>
+	</p>
+
+	<p>
+		<%= f.submit %>
+	</p>
+<% end %>
+
+<p>
+	<%= link_to 'Back', brands_path %>
+</p>

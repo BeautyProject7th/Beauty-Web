@@ -1,0 +1,103 @@
+
+  <div>
+  	<div class = "beauty_main">
+  		<h1><%= @brand.brand %></h1> <h5><%= @brand.crawler %></h5> <small>Beauty_project</small>
+  </div>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <div class="navbar-brand">Category</div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <% cnt = Cosmetic.select(:cate).distinct.count %>
+            <% for i in 0..cnt-1 do %> 
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= Cosmetic.group(:cate)[i][:cate] %><span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </li>
+            <% end %>
+
+
+
+
+            <li class="dropdown">
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+      </div><!-- /.container-fluid -->
+    </nav>
+
+  <div class = "container">
+  <p>
+  	<%= link_to "List", brands_path %>
+  </p>
+
+  <p>
+  	<%= form_tag import_brand_cosmetics_path(@brand), multipart: true do %>
+  		<%= file_field_tag :file%>
+  		<%= submit_tag "Import" %>
+  	<% end %>
+  </p>
+
+  <p>
+  	<%= link_to 'Add Cosmetic', new_brand_cosmetic_path(@brand) %>
+  </p>
+
+  <h2>Cosmetics</h2>
+
+  <table border=1>
+  	<tr>
+  		<th>Category</th>
+  		<th>Sub_category</th>
+  		<th>Product_Name</th>
+  		<th>Product_Image</th>
+  	</tr>
+
+   	<% @brand.cosmetics.each do |cosmetic| %>
+  	<tr>
+  		<td><%= cosmetic.cate %></td>
+  		<td><%= cosmetic.sub_cate %></td>
+  		<td><%= cosmetic.pdName %></td>
+  		<td><%= cosmetic.pdImg %></td>
+  		<td><%= link_to 'Show', brand_cosmetic_path(@brand, cosmetic) %></td>	
+  	<% end %> 
+  	</tr> 
+  </table>
+  </div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
