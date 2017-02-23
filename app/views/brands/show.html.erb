@@ -12,10 +12,10 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <% cnt = Cosmetic.select(:cate).distinct.count %>
+            <% cnt = Cosmetic.where(brand_id: @brand).select(:cate).distinct.count %>
             <% for i in 0..cnt-1 do %> 
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= Cosmetic.group(:cate)[i][:cate] %><span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= Cosmetic.where(brand_id: @brand).select(:cate).distinct[i][:cate] %><span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#">Something else here</a></li>
                   <li class="divider"></li>
