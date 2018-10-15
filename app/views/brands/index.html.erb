@@ -1,6 +1,7 @@
 <div class = "beauty_main">
 	<div class >
-	<h1> Beauty Project <small>Software Maestro 7th</small></h1>
+	<%= image_tag "logo2.png", :width => 400 %></h1>
+
 	</div>
 </div>
 
@@ -16,13 +17,13 @@
 		<th> Brand Name </th>
 		<th> Crawler </th>
 		<th> Time </th>
+    <th> </th>
 	</tr>
 
 	<% @brands.each do |brand| %>
-	<tr data-link="<%= brand_path(brand) %>">
 		<td><%= brand.id %></td>
 		<td>
-			<%= brand.brand %>
+			<%= link_to brand.brand, brand_path(brand) %>
 			<% if brand.created_at > Time.now - 3.days %>
 				<span class="badge new">new</span>
 			<% end %>
@@ -32,6 +33,7 @@
 		</td>
 		<td><%= brand.crawler %></td>
 		<td><%= brand.created_at.strftime("%y.%m.%d, %H:%M") %></td>
+		<td><%= button_to 'Destroy', brand_path(brand), method: :delete, data: { confirm: "Are you sure?"} %></td>
 	</tr>
 	<% end %>
 </table>
