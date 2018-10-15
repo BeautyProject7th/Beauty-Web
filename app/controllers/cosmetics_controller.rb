@@ -46,6 +46,14 @@ class CosmeticsController < ApplicationController
 		redirect_to brands_path
 	end
 
+	def destroy
+		@brand = Brand.find(params[:brand_id])
+		@cosmetic = @brand.cosmetics.find(params[:id])
+
+		@cosmetic.destroy
+		redirect_to brand_path(@brand)
+	end
+
 	private
 		def cosmetic_params
 			params.require(:cosmetic).permit(:cate, :sub_cate, :pdName, :pdImg)
