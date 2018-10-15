@@ -1,103 +1,81 @@
-
-  <div>
-  	<div class = "beauty_main">
-  		<h1><%= @brand.brand %></h1> <h5><%= @brand.crawler %></h5> <small>Beauty_project</small>
+<div>
+	<div class = "beauty_main">
+    <%= link_to brands_path do %>
+      <%= image_tag "logo2.png", :width => 400 %>
+    <% end %>
   </div>
+</div>
 
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <div class="navbar-brand">Category</div>
-        </div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="navbar-brand">
+        <%= @brand.brand %>
+      </div>
+    </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <% cnt = Cosmetic.where(brand_id: @brand).select(:cate).distinct.count %>
-            <% for i in 0..cnt-1 do %> 
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= Cosmetic.where(brand_id: @brand).select(:cate).distinct[i][:cate] %><span class="caret"></span></a>
+      <ul class="nav navbar-nav">
+        <% category = Cosmetic.where(brand_id: @brand).select(:cate).distinct %>
+        <% cate_cnt = category.count %>
+          <% for i in 0..cate_cnt-1 do %>
+            <li class="dropdown">
+              <% cateName = category[i][:cate] %>
+              <% sub_category = Cosmetic.where(brand_id: @brand, cate: cateName).select(:sub_cate).distinct %>
+              <% sub_cnt = sub_category.count %>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= cateName %><span class="badge"><%= sub_cnt %></span><span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
+                  <% for j in 0..sub_cnt-1 do %>
+                  <% sub_Name = sub_category[j][:sub_cate] %>
+                    <li><%= link_to sub_Name %><li>
+                  <% end %>
                 </ul>
-              </li>
-            <% end %>
-
-
-
-
-            <li class="dropdown">
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
             </li>
-          </ul>
+          <% end %>
+      </ul>
+  </div>
+</nav>
 
-          <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
+<div class = "container">
+  <p>
+    <%= form_tag import_brand_cosmetics_path(@brand), multipart: true do %>
+      <%= file_field_tag :file %><%= submit_tag "Import" %>
+    <% end %>
+  </p>
+  <p><%= link_to '개별 화장품 추가하기', new_brand_cosmetic_path(@brand) %></p>
 
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Link</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
-            </li>
-          </ul>
+  <h2>Cosmetics List</h2>
+
+  <% @brand.cosmetics.each do |cosmetic| %>
+    <%= link_to brand_cosmetic_path(@brand, cosmetic) do %>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <div class="notice">
+          <% if cosmetic.created_at > Time.now - 3.days %>
+            <span class="badge new">new</span>
+          <% end %>
+          <% if cosmetic.updated_at > Time.now - 3.days %>
+            <span class="badge update">update</span>
+          <% end %>
         </div>
 
-      </div><!-- /.container-fluid -->
-    </nav>
+        <%= image_tag cosmetic.pdImg %>
+        <% end %>
 
-  <div class = "container">
-  <p>
-  	<%= link_to "List", brands_path %>
-  </p>
+        <div class="caption">
+          <h4><%= truncate cosmetic.pdName, length: 40%></h4>
+          <p><%= cosmetic.cate %> > <%= cosmetic.sub_cate%></p>
+        </div>
 
-  <p>
-  	<%= form_tag import_brand_cosmetics_path(@brand), multipart: true do %>
-  		<%= file_field_tag :file%>
-  		<%= submit_tag "Import" %>
-  	<% end %>
-  </p>
+        <div class="button">
+          <p>
+            <%= link_to 'Edit', edit_brand_cosmetic_path(@brand, cosmetic), class: "btn btn-primary"%>
+            <%= link_to 'Destroy', [cosmetic.brand, cosmetic], class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure?" } %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-  <p>
-  	<%= link_to 'Add Cosmetic', new_brand_cosmetic_path(@brand) %>
-  </p>
-
-  <h2>Cosmetics</h2>
-
-  <table border=1>
-  	<tr>
-  		<th>Category</th>
-  		<th>Sub_category</th>
-  		<th>Product_Name</th>
-  		<th>Product_Image</th>
-  	</tr>
-
-   	<% @brand.cosmetics.each do |cosmetic| %>
-  	<tr>
-  		<td><%= cosmetic.cate %></td>
-  		<td><%= cosmetic.sub_cate %></td>
-  		<td><%= cosmetic.pdName %></td>
-  		<td><%= cosmetic.pdImg %></td>
-  		<td><%= link_to 'Show', brand_cosmetic_path(@brand, cosmetic) %></td>	
-  	<% end %> 
-  	</tr> 
-  </table>
-  </div>
-
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
