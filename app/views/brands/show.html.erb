@@ -1,9 +1,7 @@
-<div>
-	<div class = "beauty_main">
-    <%= link_to brands_path do %>
-      <%= image_tag "logo2.png", :width => 400 %>
-    <% end %>
-  </div>
+<div class="beauty_main">
+  <%= link_to brands_path do %>
+    <%= image_tag "logo2.png", :width => 400 %>
+  <% end %>
 </div>
 
 <nav class="navbar navbar-default">
@@ -14,34 +12,38 @@
       </div>
     </div>
 
-      <ul class="nav navbar-nav">
-        <% category = Cosmetic.where(brand_id: @brand).select(:cate).distinct %>
-        <% cate_cnt = category.count %>
-          <% for i in 0..cate_cnt-1 do %>
-            <li class="dropdown">
-              <% cateName = category[i][:cate] %>
-              <% sub_category = Cosmetic.where(brand_id: @brand, cate: cateName).select(:sub_cate).distinct %>
-              <% sub_cnt = sub_category.count %>
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= cateName %><span class="badge"><%= sub_cnt %></span><span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <% for j in 0..sub_cnt-1 do %>
-                  <% sub_Name = sub_category[j][:sub_cate] %>
-                    <li><%= link_to sub_Name %><li>
-                  <% end %>
-                </ul>
-            </li>
-          <% end %>
-      </ul>
+    <ul class="nav navbar-nav">
+      <% category = Cosmetic.where(brand_id: @brand).select(:cate).distinct %>
+      <% cate_cnt = category.count %>
+        <% for i in 0..cate_cnt-1 do %>
+          <li class="dropdown">
+            <% cateName = category[i][:cate] %>
+            <% sub_category = Cosmetic.where(brand_id: @brand, cate: cateName).select(:sub_cate).distinct %>
+            <% sub_cnt = sub_category.count %>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= cateName %><span class="badge"><%= sub_cnt %></span><span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <% for j in 0..sub_cnt-1 do %>
+                <% sub_Name = sub_category[j][:sub_cate] %>
+                  <li><%= link_to sub_Name %><li>
+                <% end %>
+              </ul>
+          </li>
+        <% end %>
+    </ul>
   </div>
 </nav>
 
-<div class = "container">
-  <p>
+<div class="container">
+  <div class="input-group">
+    <div class="custom-file">
     <%= form_tag import_brand_cosmetics_path(@brand), multipart: true do %>
-      <%= file_field_tag :file %><%= submit_tag "Import" %>
+      <%= file_field_tag :file, class: "custom-file-input" %>
+      <%= submit_tag "CSV Import" %>
     <% end %>
-  </p>
-  <p><%= link_to '개별 화장품 추가하기', new_brand_cosmetic_path(@brand) %></p>
+    </div>
+  </div>
+
+  <p class="add-cosmetic"><%= link_to '개별 화장품 추가하기', new_brand_cosmetic_path(@brand) %></p>
 
   <h2>Cosmetics List</h2>
 
