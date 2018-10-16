@@ -1,24 +1,5 @@
-# README
+# Software Maestro 7기 2단계
+## Maehwa
+* 크롤링한 화장품 관리툴(Ruby on Rails/Bootstrap)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![screenshot](./screenshot.png)
